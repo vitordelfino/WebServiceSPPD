@@ -11,6 +11,20 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class Passageiro {
+	
+	private int codPassageiro;	
+	private String nome; 
+	private String cpf; 
+	private String rg; 
+	private String logradouro;  
+	private String numero;  
+	private String complemento;  
+	private String cep;  
+	private String bairro;  
+	private String municipio;  
+	private String nascimento;
+	private boolean deficiente;
+	
 	public Passageiro(){
 		
 	}
@@ -49,20 +63,6 @@ public class Passageiro {
 		this.complemento = " ";
 	}
 
-	private int codPassageiro;	
-	private String nome; 
-	private String cpf; 
-	private String rg; 
-	private String logradouro;  
-	private String numero;  
-	private String complemento;  
-	private String cep;  
-	private String bairro;  
-	private String municipio;  
-	private String nascimento;
-	private boolean deficiente;
-	
-	
 	public int getCodPassageiro() {
 		return codPassageiro;
 	}

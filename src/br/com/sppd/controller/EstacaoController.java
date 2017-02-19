@@ -13,13 +13,6 @@ import br.com.sppd.dbms.dao.EstacaoDAO;
  */
 public class EstacaoController {
 	
-	/**
-	 * 
-	 * Método resposável por chamar a classe DAO de Estacoes 
-	 * @author Vitor Silva Delfino <vitor.delfino952@gmail.com>
-	 * @since 2 de dez de 2016
-	 * @return List<Estacao
-	 */
 	public List<Estacao> getListaEstacao(){
 		return new EstacaoDAO().getListaEstacao();
 	}

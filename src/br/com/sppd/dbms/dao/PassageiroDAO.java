@@ -77,8 +77,6 @@ public class PassageiroDAO {
 				e.printStackTrace();
 			}
 		}		
-	}
-	
-	
+	}	
 
 }

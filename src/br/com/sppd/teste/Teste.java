@@ -3,6 +3,9 @@ package br.com.sppd.teste;
 import java.util.Date;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import br.com.sppd.dbms.bean.Estacao;
 import br.com.sppd.dbms.bean.Passageiro;
 import br.com.sppd.dbms.dao.EstacaoDAO;
@@ -20,7 +23,17 @@ public class Teste {
 		//testaGetEstacao();
 		//testeCadastraPassageiro();
 		
-		logar();
+		JSONObject jo = new JSONObject();
+		try {
+			jo.put("valor", 10.00);
+			System.out.println(jo);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		//logar();
 	}
 
 

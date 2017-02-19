@@ -10,6 +10,7 @@ import java.util.List;
 import br.com.sppd.dbms.bean.LoginBean;
 import br.com.sppd.dbms.bean.Passageiro;
 import br.com.sppd.factory.ConnectionFactory;
+import br.com.sppd.retorno.Retorno;
 
 /**
  * 
@@ -70,6 +71,129 @@ public class Login {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}			
+		}
+	}
+	
+	/**
+	 * 
+	 * Método resposável por alterar a senha de acesso
+	 * @author Vitor Silva Delfino <vitor.delfino952@gmail.com>
+	 * @since 19 de fev de 2017
+	 * @param cpf
+	 * @param senhaAtual
+	 * @param NovaSenha
+	 * @return
+	 */
+	public Retorno alterarSenha(String cpf, String senhaAtual, String novaSenha){
+				
+		if(!validarSenha(cpf, senhaAtual))
+			return new Retorno(false, "Senha atual incorreta !");
+		System.out.println("Senha atual validada");
+		Connection c = null;
+		PreparedStatement pst = null;
+		String sql = "update LOGIN l " +
+				"set l.password = ? " +
+				"where l.username = ? ";		
+		try{
+			c = new ConnectionFactory().getConnection();
+			pst = c.prepareStatement(sql);
+			pst.setString(1, novaSenha);
+			pst.setString(2, cpf);
+			pst.execute();
+			System.out.println("Senha alterada");
+			return new Retorno(true, "Sucess");
+		}catch (SQLException e) {
+			return new Retorno(false, "Error: " + e.getMessage());
+		}finally {
+			try {
+				pst.close();
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	/**
+	 * 
+	 * Método resposável por alterar senha do usuário ao logar pela primeira vez
+	 * @author Vitor Silva Delfino <vitor.delfino952@gmail.com>
+	 * @since 19 de fev de 2017
+	 * @param cpf
+	 * @param senhaAtual
+	 * @param NovaSenha
+	 * @return
+	 */
+	public Retorno alterarSenha(String cpf, String novaSenha){
+		Connection c = null;
+		PreparedStatement pst = null;
+		String sql = "update LOGIN l " +
+				"set l.password = ? " +
+				"where l.username = ? ";
+		
+		try{
+			c = new ConnectionFactory().getConnection();
+			pst = c.prepareStatement(sql);			
+			pst.setString(1, novaSenha);
+			pst.setString(2, cpf);
+			pst.execute();
+			System.out.println("Senha alterada");
+			return new Retorno(true, "Sucess");
+		}catch (SQLException e) {
+			return new Retorno(false, "Error: " + e.getMessage());
+		}finally {
+			try {
+				pst.close();
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * Método resposável por validar se as senhas enviadas são iguais
+	 * @author Vitor Silva Delfino <vitor.delfino952@gmail.com>
+	 * @since 19 de fev de 2017
+	 * @param cpf
+	 * @param senha
+	 * @return
+	 */
+	private boolean validarSenha(String cpf, String senha){
+		Connection c = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		String sql = "select l.password from LOGIN l where l.username = ? ";
+		try{
+			System.out.println("Buscando usuário: " + cpf);
+			c = new ConnectionFactory().getConnection();
+			pst = c.prepareStatement(sql);
+			pst.setString(1, cpf);
+			rs = pst.executeQuery();
+			
+			rs.next();			
+			if(senha.equals(rs.getString(1))){
+				System.out.println("Senha confere: true" );
+				return true;
+			}else{
+				System.out.println("Senha confere: false" );
+				return false;
+			}
+		}catch (SQLException e) {
+			System.out.println("Error: " + e.getMessage() );
+			return false;
+		}finally {
+			try {
+				pst.close();
+				c.close();
+				if(rs != null)
+					rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }

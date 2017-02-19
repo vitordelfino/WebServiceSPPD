@@ -4,7 +4,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class LoginBean {
-	
+
+	private Passageiro passageiro;
+	private String usuario;
+	private String senha;
+	private boolean retorno;
+	private String statusRetorno;
 	
 	public LoginBean(){
 		
@@ -24,11 +29,6 @@ public class LoginBean {
 	}
 
 
-	private Passageiro passageiro;
-	private String usuario;
-	private String senha;
-	private boolean retorno;
-	private String statusRetorno;
 	
 	
 	public Passageiro getPassageiro() {
