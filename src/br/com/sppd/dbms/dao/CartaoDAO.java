@@ -81,7 +81,7 @@ public class CartaoDAO {
 	public Retorno efetuarRecarga(Cartao cartao, double valor) {
 		Connection c = null;
 		PreparedStatement pst = null;
-		String query = "update cartao c " + "set c.saldo = ? " + "where c.codCartao = ?, c.codPassageiro = ?";
+		String query = "update cartao c " + "set c.saldo = ? " + "where c.codCartao = ? and c.codPassageiro = ?";
 
 		try {
 			c = new ConnectionFactory().getConnection();
@@ -91,7 +91,7 @@ public class CartaoDAO {
 			pst.setInt(3, cartao.getCodPassageiro());
 			pst.execute();
 
-			return new Retorno(true, "Recarga no valor de R$ " + valor + "efetuada.");
+			return new Retorno(true, "Recarga no valor de R$ " + valor + " efetuada.");
 
 		} catch (SQLException e) {
 			return new Retorno(false, "Error: " + e.getMessage());

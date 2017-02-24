@@ -21,6 +21,7 @@ import br.com.sppd.dbms.bean.Estacao;
 import br.com.sppd.dbms.bean.LoginBean;
 import br.com.sppd.dbms.bean.Passageiro;
 import br.com.sppd.retorno.Retorno;
+import jdk.nashorn.internal.parser.JSONParser;
 
 /**
  * 
@@ -52,22 +53,48 @@ public class SppdResource {
 	/*
 	 * REQUISICOES REFERENTE MANIPULACAO DE PASSAGEIRO/USUARIO
 	 */
+	
+	/*@Path("passageiro/cadastraPassageiro/{nome}/{cpf}/{rg}/{logradouro}/{numero}/"
+			+ "{complemento}/{cep}/{bairro}/{municipio}/{nascimento}/{deficiente}")*/
+	
+/*	@PathParam("nome") String nome, @PathParam("cpf") String cpf,
+	@PathParam("rg") String rg, @PathParam("logradouro") String logradouro, @PathParam("numero") String numero,
+	@PathParam("complemento") String complemento, @PathParam("cep") String cep,
+	@PathParam("bairro") String bairro, @PathParam("municipio") String municipio,
+	@PathParam("nascimento") String nascimento, @PathParam("deficiente") String deficiente*/
+	
+	
 	@POST
-	@Path("passageiro/cadastraPassageiro/{nome}/{cpf}/{rg}/{logradouro}/{numero}/"
-			+ "{complemento}/{cep}/{bairro}/{municipio}/{nascimento}/{deficiente}")
+	@Path("passageiro/cadastraPassageiro/")
 	@Consumes({ "application/json" })
 	@Produces("application/json")
-	public List<Retorno> cadastraPassageiro(@PathParam("nome") String nome, @PathParam("cpf") String cpf,
-			@PathParam("rg") String rg, @PathParam("logradouro") String logradouro, @PathParam("numero") String numero,
-			@PathParam("complemento") String complemento, @PathParam("cep") String cep,
-			@PathParam("bairro") String bairro, @PathParam("municipio") String municipio,
-			@PathParam("nascimento") String nascimento, @PathParam("deficiente") String deficiente) {
+	public List<Retorno> cadastraPassageiro(String inputJson) throws JSONException {
+		
+		JSONObject jo = new JSONObject(inputJson);
+		System.out.println("Body recebido: \n" + jo);
+		
+		String nascimento = jo.getString("nascimento");
 		nascimento = nascimento.substring(6, nascimento.length()) + "-" + nascimento.substring(3, 5) + "-"
 				+ nascimento.substring(0, 2);
+		
+		String cpf = jo.getString("cpf");
 		cpf = cpf.replace(".", "");
 		cpf = cpf.replaceAll("-", "");
-		Passageiro p = new Passageiro(1, nome, cpf, rg, logradouro, numero, complemento, cep, bairro, municipio,
-				nascimento, Boolean.parseBoolean(deficiente));
+		
+		
+		Passageiro p = new Passageiro(1, 
+				jo.getString("nome"), 
+				cpf, 
+				jo.getString("rg"), 
+				jo.getString("logradouro"), 
+				jo.getString("numero"), 
+				jo.getString("complemento"), 
+				jo.getString("cep"), 
+				jo.getString("bairro"), 
+				jo.getString("municipio"),
+				nascimento, 
+				jo.getBoolean("deficiente")
+				);
 
 		System.out.println(p.toString());
 		List<Retorno> list = new PassageiroController().cadastraPassageiro(p);
@@ -84,7 +111,10 @@ public class SppdResource {
 	@Path("login/logar/{usuario}/{senha}")
 	@Produces("application/json")
 	public List<LoginBean> logar(@PathParam("usuario") String usuario, @PathParam("senha") String senha) {
-		return new LoginController().logar(usuario, senha);
+		System.out.println("Logando com usuário: " + usuario);
+		List<LoginBean> retorno = new LoginController().logar(usuario, senha);
+		System.out.println(retorno.toString());
+		return retorno;
 	}
 
 	@POST
@@ -121,17 +151,20 @@ public class SppdResource {
 
 	@POST
 	@Path("/cartao/efetuarRecarga/{codCartao}/{codPassageiro}")
-	@Consumes({ "application/json" })
 	@Produces("application/json")
+	@Consumes({ "application/json" })	
 	public Retorno efetuarRecarga(@PathParam("codCartao") int codCartao, @PathParam("codPassageiro") int codPassageiro,
-			JSONObject inputJson) throws NumberFormatException, JSONException {
+			String inputJson) throws NumberFormatException, JSONException {
 
 		System.out.println("Tentando efetuar recarga");
-		System.out.println(inputJson);
+		System.out.println("Json recebido: " + inputJson);
 		Cartao cartao = new Cartao(codCartao, codPassageiro);
-
-		Double valor = Double.parseDouble(inputJson.get("valor").toString());
-
+		
+		JSONObject jo = new JSONObject(inputJson);
+		
+		Double valor = Double.parseDouble(jo.get("valor").toString());
+		
+		System.out.println("Valor de Recarga: " + valor);
 		Retorno retorno = new CartaoController().efetuarRecarga(cartao, valor);
 		System.out.println(retorno);
 		return retorno;
