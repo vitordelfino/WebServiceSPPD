@@ -162,7 +162,7 @@ public class SppdResource {
 		
 		JSONObject jo = new JSONObject(inputJson);
 		
-		Double valor = Double.parseDouble(jo.get("valor").toString());
+		Double valor = jo.getDouble("valor");
 		
 		System.out.println("Valor de Recarga: " + valor);
 		Retorno retorno = new CartaoController().efetuarRecarga(cartao, valor);

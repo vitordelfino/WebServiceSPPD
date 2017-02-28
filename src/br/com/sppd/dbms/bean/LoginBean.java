@@ -66,7 +66,7 @@ public class LoginBean {
 
 	@Override
 	public String toString() {
-		return "LoginBean [retorno=" + retorno + ", statusRetorno=" + statusRetorno + "]";
+		return "LoginBean [retorno=" + retorno + ", statusRetorno=" + statusRetorno + "Passageiro=" + passageiro.toString() + "]";
 	}
 	
 	

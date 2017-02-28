@@ -79,30 +79,39 @@ public class CartaoDAO {
 	 * @param valor
 	 */
 	public Retorno efetuarRecarga(Cartao cartao, double valor) {
-		Connection c = null;
-		PreparedStatement pst = null;
-		String query = "update cartao c " + "set c.saldo = ? " + "where c.codCartao = ? and c.codPassageiro = ?";
+		int aux = buscaCartao(cartao.getCodCartao());
+		System.out.println("Resultado da busca: " + aux);
 
-		try {
-			c = new ConnectionFactory().getConnection();
-			pst = c.prepareStatement(query);
-			pst.setDouble(1, valor);
-			pst.setInt(2, cartao.getCodCartao());
-			pst.setInt(3, cartao.getCodPassageiro());
-			pst.execute();
-
-			return new Retorno(true, "Recarga no valor de R$ " + valor + " efetuada.");
-
-		} catch (SQLException e) {
-			return new Retorno(false, "Error: " + e.getMessage());
-		} finally {
+		if (aux == 0) {
+			return new Retorno(false, "Cartão " + cartao.getCodCartao() + " inativo.");
+		
+		} else {
+		
+			Connection c = null;
+			PreparedStatement pst = null;
+			String query = "update cartao c " + "set c.saldo =  c.saldo + ? " + "where c.codCartao = ? and c.codPassageiro = ?";
+		
 			try {
-				System.out.println("** Finalizando Conexões **");
-				pst.close();
-				c.close();
+				c = new ConnectionFactory().getConnection();
+				pst = c.prepareStatement(query);
+				pst.setDouble(1, valor);
+				pst.setInt(2, cartao.getCodCartao());
+				pst.setInt(3, cartao.getCodPassageiro());
+				pst.execute();
+		
+				return new Retorno(true, "Recarga no valor de R$ " + valor + " efetuada.");
+		
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				return new Retorno(false, "Error: " + e.getMessage());
+			} finally {
+				try {
+					System.out.println("** Finalizando Conexões **");
+					pst.close();
+					c.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}
