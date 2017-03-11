@@ -19,6 +19,7 @@ public class LoginBean {
 		super();
 		this.retorno = retorno;
 		this.statusRetorno = statusRetorno;
+		this.passageiro = new Passageiro();
 	}
 	
 	public LoginBean(Passageiro passageiro,boolean retorno, String statusRetorno) {
