@@ -25,7 +25,7 @@ import jdk.nashorn.internal.parser.JSONParser;
 
 /**
  * 
- * Classe respos√°vel por conter os metodos REST de acesso ao webservice
+ * Classe respos·vel por conter os metodos REST de acesso ao webservice
  * 
  * @author Vitor Silva Delfino <vitor.delfino952@gmail.com>
  * @since 2 de dez de 2016
@@ -36,7 +36,7 @@ public class SppdResource {
 
 	/**
 	 * 
-	 * M√©todo respos√°vel por fazer a chamada ao Controller
+	 * MÈtodo respos·vel por fazer a chamada ao Controller
 	 * 
 	 * @author Vitor Silva Delfino <vitor.delfino952@gmail.com>
 	 * @since 2 de dez de 2016
