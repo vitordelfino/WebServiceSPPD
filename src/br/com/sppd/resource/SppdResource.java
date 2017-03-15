@@ -123,6 +123,7 @@ public class SppdResource {
 	@Produces("application/json")
 	public Retorno alterarSenha(@PathParam("cpf") String cpf,
 				@PathParam("novaSenha") String novaSenha){
+		System.out.println("Chamando método de alteração de senha para novos usuários");
 		return new LoginController().alterarSenha(cpf, novaSenha);
 	}
 	@POST
@@ -132,6 +133,7 @@ public class SppdResource {
 	public Retorno alterarSenha(@PathParam("cpf") String cpf,
 				@PathParam("senhaAtual") String senhaAtual,
 				@PathParam("novaSenha") String novaSenha){
+		System.out.println("Chamando método de alteração de senha para usuários já cadastrados");
 		return new LoginController().alterarSenha(cpf,senhaAtual, novaSenha);
 	}
 	

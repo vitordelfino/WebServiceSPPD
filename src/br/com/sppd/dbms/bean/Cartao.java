@@ -23,8 +23,8 @@ public class Cartao {
 		
 	}
 	
-	public Cartao(int codCartao, int categoria, int codPassageiro, int ativo, double saldo,
-			double ultimoMovimento) {
+	public Cartao(int codCartao, int categoria, int ativo, double saldo,
+			double ultimoMovimento, int codPassageiro) {
 		super();
 		this.codCartao = codCartao;
 		this.categoria = categoria;

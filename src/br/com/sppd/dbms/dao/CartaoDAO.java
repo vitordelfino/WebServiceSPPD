@@ -129,8 +129,8 @@ public class CartaoDAO {
 			rs = pst.executeQuery();
 
 			while (rs.next()) {
-				retorno.add(new Cartao(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDouble(5),
-						rs.getDouble(6)));
+				retorno.add(new Cartao(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getDouble(4),
+						rs.getDouble(5),  rs.getInt(6)));
 			}
 			return retorno;
 

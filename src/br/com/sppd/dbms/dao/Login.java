@@ -56,7 +56,7 @@ public class Login {
 				l.add(new LoginBean(p,true, "Sucess"));
 				return l;
 			}else{
-				l.add(new LoginBean(false, "usu·rio ou Senha n√£o encontrado"));
+				l.add(new LoginBean(false, "usu·rio ou Senha n„o encontrado"));
 				return l;
 			}
 		}catch(SQLException e){
@@ -125,6 +125,8 @@ public class Login {
 	 * @return
 	 */
 	public Retorno alterarSenha(String cpf, String novaSenha){
+		System.out.println("Alterando senha do usu·rio: " + cpf);
+		System.out.println("Nova Senha = " + novaSenha);
 		Connection c = null;
 		PreparedStatement pst = null;
 		String sql = "update LOGIN l " +
