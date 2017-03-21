@@ -19,11 +19,11 @@ public class Teste {
 		// TODO Auto-generated method stub
 		
 		
-		//testaConexao();
+		testaConexao();
 		//testaGetEstacao();
 		//testeCadastraPassageiro();
 		
-		JSONObject jo = new JSONObject();
+		/*JSONObject jo = new JSONObject();
 		try {
 			jo.put("valor", 10.00);
 			System.out.println(jo);
@@ -31,7 +31,7 @@ public class Teste {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		*/
 		
 		//logar();
 	}
