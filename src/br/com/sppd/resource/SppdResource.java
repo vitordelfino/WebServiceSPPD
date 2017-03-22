@@ -186,4 +186,19 @@ public class SppdResource {
 		return retorno;
 
 	}
+	
+	@POST
+	@Path("/cartao/desativarCartao/{codCartao}/{codPassageiro}")
+	@Consumes({ "application/json" })
+	@Produces("application/json")
+	public Retorno desativarCartao(@PathParam("codCartao") int codCartao, 
+			@PathParam("codPassageiro") int codPassageiro) {
+
+		System.out.println("Iniciando **desativar cartao**");
+		Cartao cartao = new Cartao(codCartao, codPassageiro);
+		Retorno retorno = new CartaoController().desativarCartao(cartao);
+		System.out.println("retorno: " + retorno.toString());
+		return retorno;
+
+	}
 }

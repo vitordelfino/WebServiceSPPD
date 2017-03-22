@@ -24,7 +24,7 @@ public class CartaoDAO {
 
 	/**
 	 * 
-	 * MÃ©todo resposável por ativar o cartao
+	 * Método resposável por ativar o cartao
 	 * 
 	 * @author Vitor Silva Delfino <vitor.delfino952@gmail.com>
 	 * @since 18 de fev de 2017
@@ -41,7 +41,7 @@ public class CartaoDAO {
 		} else if (aux == 2) {
 			return new Retorno(false, "Cartão " + cartao.getCodCartao() + " não encontrado.");
 		} else if (aux == 3) {
-			return new Retorno(false, "No momento nÃ£o foi possÃ­vel ativar o cartão.");
+			return new Retorno(false, "No momento nnãoo foi possível ativar o cartão.");
 		} else {
 			Connection c = null;
 			PreparedStatement pst = null;
@@ -68,10 +68,58 @@ public class CartaoDAO {
 		}
 
 	}
+	
+	/**
+	 * 
+	 * Método responsável por desativar o cartao
+	 * @author Vitor Silva Delfino <vitor.delfino952@gmail.com>
+	 * @since 21 de mar de 2017
+	 * @param desativarCartao
+	 * @return Retorno
+	 *
+	 */
+	public Retorno desativarCartao(Cartao cartao) {
+
+		int aux = buscaCartao(cartao.getCodCartao());
+		System.out.println("Resultado da busca: " + aux);
+
+		if (aux == 0) {
+			return new Retorno(false, "Cartão " + cartao.getCodCartao() + " ja desativado.");
+		} else if (aux == 2) {
+			return new Retorno(false, "Cartão " + cartao.getCodCartao() + " não encontrado.");
+		} else if (aux == 3) {
+			return new Retorno(false, "No momento nnãoo foi possível desativar o cartão.");
+		} else {
+			Connection c = null;
+			PreparedStatement pst = null;
+			String query1 = "update cartao c " + "set c.ativo = 0" + " where c.codCartao = ? and c.codPassageiro = ? ";
+			try {
+				c = new ConnectionFactory().getConnection();
+				pst = c.prepareStatement(query1);
+				pst.setInt(1, cartao.getCodCartao());
+				pst.setInt(2, cartao.getCodPassageiro());
+				pst.execute();
+				return new Retorno(true, "Sucess");
+			} catch (SQLException e) {
+				return new Retorno(false, "Error: " + e.getMessage());
+			} finally {
+				try {
+					System.out.println("** Finalizando Conexão **");
+					pst.close();
+					c.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+	
 
 	/**
 	 * 
-	 * MÃ©todo resposável por efetuar recarga do cartao
+	 * Método resposável por efetuar recarga do cartao
 	 * 
 	 * @author Vitor Silva Delfino <vitor.delfino952@gmail.com>
 	 * @since 18 de fev de 2017

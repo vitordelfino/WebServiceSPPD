@@ -14,9 +14,9 @@ public class ConnectionFactory {
 			//"jdbc:mysql://localhost/SPPD";
 			//"root";
 			//"123456";
-			String url = "jdbc:mysql://us-cdbr-azure-east-c.cloudapp.net:3306/msqlsppd";
-			String userName = "badf4160ede94a";
-			String passWord = "4efd22b1";
+			String url = "jdbc:mysql://localhost/SPPD";
+			String userName = "root";
+			String passWord = "123456";
 			
 			con = DriverManager.getConnection(url,userName,passWord);
 			

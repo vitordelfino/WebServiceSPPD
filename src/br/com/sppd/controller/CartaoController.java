@@ -27,4 +27,8 @@ public class CartaoController {
 	public Retorno ativarCartao(Cartao cartao){
 		return new CartaoDAO().ativarCartao(cartao);
 	}
+	
+	public Retorno desativarCartao(Cartao cartao){
+		return new CartaoDAO().desativarCartao(cartao);
+	}
 }
