@@ -11,9 +11,6 @@ public class ConnectionFactory {
 		try{
 			String driveName = "com.mysql.jdbc.Driver";
 			Class.forName(driveName);		
-			//"jdbc:mysql://localhost/SPPD";
-			//"root";
-			//"123456";
 			String url = "jdbc:mysql://localhost/SPPD";
 			String userName = "root";
 			String passWord = "123456";
