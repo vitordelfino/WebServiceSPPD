@@ -68,10 +68,10 @@ public class ViagemDAO {
 		Connection = null;
 		PreparedStatement pst = null;
 		String query = "insert into historicoViagem"+
-									 "(codPassageiro, codCartao,dataEntrada, dataSaida, origem, destino,"+
-									 "saldoAnterior, saldoAtual, entrandoSaindo, valor)"+
-									 "values"+
-									 "(?,?,NOW(),NOW(),?,?,?,?,0,?)";
+			"(codPassageiro, codCartao,dataEntrada, dataSaida, origem, destino,"+
+			"saldoAnterior, saldoAtual, entrandoSaindo, valor)"+
+			"values"+
+			"(?,?,NOW(),NOW(),?,?,?,?,0,?)";
 		Retorno retorno = new Retorno(false,"");
 		
 		try{
