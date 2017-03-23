@@ -16,7 +16,7 @@ import br.com.sppd.dbms.bean.Estacao;
 import br.com.sppd.factory.ConnectionFactory;
 
 /**
- * Classe responsável por realizar métodos de consulta ao BD relacionado a EstaÃ§Ãµes
+ * Classe responsável por realizar métodos de consulta ao BD relacionado a Estação
  * @author Vitor Silva Delfino <vitor.delfino952@gmail.com>
  * @since 2 de dez de 2016
  */

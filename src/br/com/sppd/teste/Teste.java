@@ -1,17 +1,17 @@
 package br.com.sppd.teste;
 
-import java.util.Date;
 import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import br.com.sppd.dbms.bean.Cartao;
 import br.com.sppd.dbms.bean.Estacao;
 import br.com.sppd.dbms.bean.Passageiro;
+import br.com.sppd.dbms.bean.Viagem;
 import br.com.sppd.dbms.dao.EstacaoDAO;
 import br.com.sppd.dbms.dao.Login;
 import br.com.sppd.dbms.dao.PassageiroDAO;
+import br.com.sppd.dbms.dao.ViagemDAO;
 import br.com.sppd.factory.ConnectionFactory;
+import br.com.sppd.retorno.Retorno;
 
 public class Teste {
 
@@ -34,6 +34,8 @@ public class Teste {
 		*/
 		
 		//logar();
+		
+		setNovaViagem();
 	}
 
 
@@ -64,5 +66,16 @@ static void testeCadastraPassageiro(){
 static void logar(){
 	Login l = new Login();
 	System.out.println(l.logar("42780908890", "42780908890.").toString());
+}
+
+static void setNovaViagem(){
+	Viagem viagem = new Viagem();
+	viagem.setCartao(new Cartao(100001));
+	viagem.setPassageiro(new Passageiro(1));
+	viagem.setOrigem(new Estacao(1));
+	
+	Retorno retorno = new ViagemDAO().setNovaViagem(viagem);
+	System.out.println(retorno.getStatus());
+	
 }
 }

@@ -14,10 +14,12 @@ import org.json.JSONObject;
 
 import br.com.sppd.controller.CartaoController;
 import br.com.sppd.controller.EstacaoController;
+import br.com.sppd.controller.HistoricoSaldoCartaoController;
 import br.com.sppd.controller.LoginController;
 import br.com.sppd.controller.PassageiroController;
 import br.com.sppd.dbms.bean.Cartao;
 import br.com.sppd.dbms.bean.Estacao;
+import br.com.sppd.dbms.bean.HistoricoSaldoCartaoBean;
 import br.com.sppd.dbms.bean.LoginBean;
 import br.com.sppd.dbms.bean.Passageiro;
 import br.com.sppd.retorno.Retorno;
@@ -139,7 +141,7 @@ public class SppdResource {
 	
 	
 	/*
-	 * REQUISICOES REFERENTE A MANIPULAÃ‡ÃƒO DE CARTÃ•ES
+	 * REQUISICOES REFERENTE A MANIPULAÇÃO DE CARTÕES
 	 */	
 	@GET
 	@Path("/cartao/getCartoes/{codPassageiro}")
@@ -200,5 +202,15 @@ public class SppdResource {
 		System.out.println("retorno: " + retorno.toString());
 		return retorno;
 
+	}
+	
+	@GET
+	@Path("/cartao/getHistoricoCartao/{codCartao}")
+	@Produces("application/json")
+	public List<HistoricoSaldoCartaoBean> getHistoricoCartao(@PathParam("codCartao") int codCartao) {
+		System.out.println("Buscando Historico do cartão");
+		List<HistoricoSaldoCartaoBean> historico = new HistoricoSaldoCartaoController().getHistoricoCartao(codCartao);
+		System.out.println("Retorno = " + historico.toString());
+		return historico;
 	}
 }

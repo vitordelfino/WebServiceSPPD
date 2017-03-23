@@ -23,6 +23,10 @@ public class Cartao {
 		
 	}
 	
+	public Cartao(int codCartao){
+		this.setCodCartao(codCartao);
+	}
+	
 	public Cartao(int codCartao, int categoria, int ativo, double saldo,
 			double ultimoMovimento, int codPassageiro) {
 		super();
