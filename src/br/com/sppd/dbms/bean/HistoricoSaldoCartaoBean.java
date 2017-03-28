@@ -17,12 +17,16 @@ public class HistoricoSaldoCartaoBean {
 	private String dataTransacao;
 	private double saldoAnterior;
 	private double saldoAtual;
+	private String descricao;
+	private double valor;
 	
-	public HistoricoSaldoCartaoBean(int codCartao, String dataTransacao, double saldoAnterior, double saldoAtual){
+	public HistoricoSaldoCartaoBean(int codCartao, String dataTransacao, double saldoAnterior, double saldoAtual, String descricao, double valor){
 		this.setCodCartao(codCartao);
 		this.setDataTransacao(dataTransacao);
 		this.setSaldoAnterior(saldoAnterior);
 		this.setSaldoAtual(saldoAtual);
+		this.setDescricao(descricao);
+		this.setValor(valor);
 	}
 	
 	public HistoricoSaldoCartaoBean(){
@@ -58,6 +62,22 @@ public class HistoricoSaldoCartaoBean {
 	public String toString() {
 		return "HistoricoSaldoCartaoBean [codCartao=" + codCartao + ", dataTransacao=" + dataTransacao
 				+ ", saldoAnterior=" + saldoAnterior + ", saldoAtual=" + saldoAtual + "]";
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public double getValor() {
+		return valor;
+	}
+
+	public void setValor(double valor) {
+		this.valor = valor;
 	}
 
 }

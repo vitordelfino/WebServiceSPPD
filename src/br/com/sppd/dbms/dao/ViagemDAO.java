@@ -20,9 +20,8 @@ public class ViagemDAO {
 	public Retorno setNovaViagem(Viagem viagem){
 		Connection c = null;
 		PreparedStatement pst = null;
-		String query = "insert into historicoViagem"+
-						"(codPassageiro, codCartao, origem, saldoAtual)"+	
-						"select ?,?,?, saldo from cartao where codCartao = ?";
+		String query = "insert into Viagem"+
+						"(codPassageiro, codCartao, origem)values(?,?,?)";
 		
 		
 		Retorno retorno = new Retorno();
@@ -33,7 +32,6 @@ public class ViagemDAO {
 			pst.setInt(1, viagem.getPassageiro().getCodPassageiro());
 			pst.setInt(2, viagem.getCartao().getCodCartao());
 			pst.setInt(3, viagem.getOrigem().getCodEstacao());
-			pst.setInt(4, viagem.getCartao().getCodCartao());
 			
 			System.out.println(query);
 			
@@ -64,29 +62,32 @@ public class ViagemDAO {
 		}
 	}
 	
-	public void setViagemCompleta(Viagem viagem){
-		Connection = null;
+	public Retorno setViagemCompleta(Viagem viagem){
+		Connection c = null;
 		PreparedStatement pst = null;
-		String query = "insert into historicoViagem"+
+		String query = "insert into Viagem"+
 			"(codPassageiro, codCartao,dataEntrada, dataSaida, origem, destino,"+
-			"saldoAnterior, saldoAtual, entrandoSaindo, valor)"+
+			"entrandoSaindo, valor)"+
 			"values"+
 			"(?,?,NOW(),NOW(),?,?,?,?,0,?)";
 		Retorno retorno = new Retorno(false,"");
 		
 		try{
-			
 			pst = c.prepareStatement(query);
 			pst.setInt(1, viagem.getPassageiro().getCodPassageiro());
 			pst.setInt(2, viagem.getCartao().getCodCartao());
 			pst.setInt(3, viagem.getOrigem().getCodEstacao());
 			pst.setInt(4, viagem.getDestino().getCodEstacao());
-			pst.setDouble(5, viagem.getSaldoAnterior());
-			pst.setDouble(6, viagem.getSaldoAtual());
 			pst.setDouble(7, viagem.getValor());
 			pst.execute();
 			
-			retorno = new Retorno(true, "Sucess");
+			return retorno = new Retorno(true, "Sucess");
+			
+		}catch(SQLException sql){
+			System.out.println("********** ERRO DE CONEXAO **********");
+			sql.printStackTrace();
+			retorno.setStatus(sql.getMessage());
+			return retorno;
 			
 		}catch(Exception sql){
 			System.out.println("********** ERRO DE CONEXAO **********");
@@ -100,11 +101,8 @@ public class ViagemDAO {
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
-			
-		}
-		
-		
+			}			
+		}	
 	}
 
 }

@@ -35,9 +35,9 @@ public class HistoricoSaldoCartaoDAO {
 		Connection c = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-		String query = "select * from historicoSaldoCartao h where h.codCartao = ?";
+		String query = "select * from historicoSaldoCartao h where h.codCartao = ? order by h.dataTransacao desc";
 		List<HistoricoSaldoCartaoBean> retorno = new ArrayList<HistoricoSaldoCartaoBean>();
-		 DateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:MM");
+		 DateFormat format = new SimpleDateFormat("dd/MM/yy hh:MM");
 		try{
 			c = new ConnectionFactory().getConnection();
 			pst = c.prepareStatement(query);
@@ -46,7 +46,7 @@ public class HistoricoSaldoCartaoDAO {
 			rs = pst.executeQuery();
 			
 			while(rs.next()){
-				retorno.add(new HistoricoSaldoCartaoBean(codCartao, format.format(rs.getDate(3)), rs.getDouble(4), rs.getDouble(5)));
+				retorno.add(new HistoricoSaldoCartaoBean(codCartao, format.format(rs.getDate(3)), rs.getDouble(4), rs.getDouble(5), rs.getString(6), rs.getDouble(7)));
 			}
 			return retorno;
 		}catch(SQLException sql){

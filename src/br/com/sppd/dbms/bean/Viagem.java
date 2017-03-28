@@ -20,8 +20,6 @@ public class Viagem {
 	private String dataViagem;
 	private Estacao origem;
 	private Estacao destino;
-	private double saldoAnterior;
-	private double saldoAtual;
 	private int entrandoSaindo;
 	private double valor;
 	public Viagem() {
@@ -34,8 +32,6 @@ public class Viagem {
 		this.setCartao(cartao);
 		this.setDataViagem(dataViagem);
 		this.setOrigem(origem);
-		this.setSaldoAnterior(saldoAnterior);
-		this.setSaldoAtual(saldoAtual);
 		this.setEntrandoSaindo(entrandoSaindo);
 		
 	}
@@ -47,8 +43,6 @@ public class Viagem {
 		this.setDataViagem(dataViagem);
 		this.setOrigem(origem);
 		this.setDestino(destino);
-		this.setSaldoAnterior(saldoAnterior);
-		this.setSaldoAtual(saldoAtual);
 		this.setValor(valor);
 		
 	}
@@ -59,8 +53,6 @@ public class Viagem {
 		this.setCartao(cartao);
 		this.setOrigem(origem);
 		this.setDestino(destino);
-		this.setSaldoAnterior(saldoAnterior);
-		this.setSaldoAtual(saldoAtual);
 	}
 
 	public int getId() {
@@ -109,22 +101,6 @@ public class Viagem {
 
 	public void setDestino(Estacao destino) {
 		this.destino = destino;
-	}
-
-	public double getSaldoAnterior() {
-		return saldoAnterior;
-	}
-
-	public void setSaldoAnterior(double saldoAnterior) {
-		this.saldoAnterior = saldoAnterior;
-	}
-
-	public double getSaldoAtual() {
-		return saldoAtual;
-	}
-
-	public void setSaldoAtual(double saldoAtual) {
-		this.saldoAtual = saldoAtual;
 	}
 
 	public int getEntrandoSaindo() {
