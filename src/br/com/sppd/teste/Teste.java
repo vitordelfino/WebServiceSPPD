@@ -10,6 +10,7 @@ import br.com.sppd.dbms.dao.EstacaoDAO;
 import br.com.sppd.dbms.dao.Login;
 import br.com.sppd.dbms.dao.PassageiroDAO;
 import br.com.sppd.dbms.dao.ViagemDAO;
+import br.com.sppd.dijkstra.testeCaminho;
 import br.com.sppd.factory.ConnectionFactory;
 import br.com.sppd.retorno.Retorno;
 
@@ -35,7 +36,9 @@ public class Teste {
 		
 		//logar();
 		
-		setNovaViagem();
+		//setNovaViagem();
+		
+		testaCaminho();
 	}
 
 
@@ -77,5 +80,9 @@ static void setNovaViagem(){
 	Retorno retorno = new ViagemDAO().setNovaViagem(viagem);
 	System.out.println(retorno.getStatus());
 	
+}
+
+static void testaCaminho(){
+	System.out.println(new testeCaminho().testar("Grafo.txt", "CARAPICUIBA", "ITAPEVI"));
 }
 }

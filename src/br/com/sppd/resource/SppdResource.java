@@ -13,6 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import br.com.sppd.controller.CartaoController;
+import br.com.sppd.controller.DijkstraController;
 import br.com.sppd.controller.EstacaoController;
 import br.com.sppd.controller.HistoricoSaldoCartaoController;
 import br.com.sppd.controller.LoginController;
@@ -22,6 +23,7 @@ import br.com.sppd.dbms.bean.Estacao;
 import br.com.sppd.dbms.bean.HistoricoSaldoCartaoBean;
 import br.com.sppd.dbms.bean.LoginBean;
 import br.com.sppd.dbms.bean.Passageiro;
+import br.com.sppd.dijkstra.Vertice;
 import br.com.sppd.retorno.Retorno;
 import jdk.nashorn.internal.parser.JSONParser;
 
@@ -212,5 +214,24 @@ public class SppdResource {
 		List<HistoricoSaldoCartaoBean> historico = new HistoricoSaldoCartaoController().getHistoricoCartao(codCartao);
 		System.out.println("Retorno = " + historico.toString());
 		return historico;
+	}
+	
+	@POST
+	@Path("/dijkstra/encontrarMenorCaminho/")
+	@Produces("application/json")
+	public List<Estacao> encontrarMenorCaminhoDijkstra(String inputJson){
+		String origem = "";
+		String destino = "";
+		try{
+			JSONObject jo = new JSONObject(inputJson);
+			System.out.println(jo);		
+		
+			origem = jo.getString("origem");
+			destino = jo.getString("destino");
+		}catch(JSONException e){
+			e.printStackTrace();
+		}		
+		
+		return new DijkstraController().encontrarMenorCaminhoDijkstra(origem, destino);
 	}
 }

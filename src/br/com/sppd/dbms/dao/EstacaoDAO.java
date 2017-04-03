@@ -33,7 +33,7 @@ public class EstacaoDAO {
 		Connection c = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-		String query = "select * from estacao";
+		String query = "select * from estacao order by nome asc";
 		List<Estacao> estacao = new ArrayList<Estacao>();
 		
 		try{
@@ -63,6 +63,42 @@ public class EstacaoDAO {
 				e.printStackTrace();
 			}
 			
+		}
+	}
+	
+	public Estacao getEstacao(String nomeEstacao){
+		Connection c = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		String query = "select * from estacao e where e.nome = ?";
+		
+		try{
+			c = new ConnectionFactory().getConnection();
+			pst = c.prepareStatement(query);
+			pst.setString(1, nomeEstacao);
+			rs = pst.executeQuery();
+			Estacao e = new Estacao();
+			while(rs.next()){
+				e = new Estacao(rs.getInt(1), rs.getInt(2), rs.getString(3));
+			}
+			return e;
+		}catch(SQLException sql){
+			System.out.println("********** ERRO DE CONEXAO **********");
+			sql.printStackTrace();
+			return new Estacao();
+		}catch(Exception sql){
+			System.out.println("********** ERRO DE CONEXAO **********");
+			sql.printStackTrace();
+			return new Estacao();
+		}finally{
+			try {
+				rs.close();
+				pst.close();
+				c.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 

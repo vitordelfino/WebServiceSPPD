@@ -85,7 +85,7 @@ public class Login {
 	 * @return
 	 */
 	public Retorno alterarSenha(String cpf, String senhaAtual, String novaSenha){
-				
+			
 		if(!validarSenha(cpf, senhaAtual))
 			return new Retorno(false, "Senha atual incorreta !");
 		System.out.println("Senha atual validada");
