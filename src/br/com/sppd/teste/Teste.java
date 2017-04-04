@@ -1,5 +1,6 @@
 package br.com.sppd.teste;
 
+import java.io.IOException;
 import java.util.List;
 
 import br.com.sppd.dbms.bean.Cartao;
@@ -10,13 +11,14 @@ import br.com.sppd.dbms.dao.EstacaoDAO;
 import br.com.sppd.dbms.dao.Login;
 import br.com.sppd.dbms.dao.PassageiroDAO;
 import br.com.sppd.dbms.dao.ViagemDAO;
+import br.com.sppd.dijkstra.PreencheArquivo;
 import br.com.sppd.dijkstra.testeCaminho;
 import br.com.sppd.factory.ConnectionFactory;
 import br.com.sppd.retorno.Retorno;
 
 public class Teste {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		
 		
@@ -38,7 +40,9 @@ public class Teste {
 		
 		//setNovaViagem();
 		
-		testaCaminho();
+		//testaCaminho();
+		
+		preencherGrafo();
 	}
 
 
@@ -85,4 +89,9 @@ static void setNovaViagem(){
 static void testaCaminho(){
 	System.out.println(new testeCaminho().testar("Grafo.txt", "CARAPICUIBA", "ITAPEVI"));
 }
+
+static void preencherGrafo() throws IOException{
+	new PreencheArquivo().preencher();
+}
+
 }

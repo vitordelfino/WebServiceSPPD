@@ -27,6 +27,13 @@ public class Estacao {
 		this.setLinha(linha);
 		this.setNome(nome);
 	}
+	
+	public Estacao(String nome, int linha){
+		this.setLinha(linha);
+		this.setNome(nome);
+		this.setCodEstacao(0);
+	}
+	
 	public Estacao(int codEstacao) {
 		this.setCodEstacao(codEstacao);
 	}

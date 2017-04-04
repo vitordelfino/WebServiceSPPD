@@ -7,13 +7,25 @@ import java.sql.SQLException;
 public class ConnectionFactory {
 	private Connection conexao(){
 		Connection con = null;
+		/* uolhost
+		   jdbc:mysql://bd-sppd.mysql.uhserver.com/bd_sppd
+		   vitor_adm
+		   224468.Delfino
+		*/
 		
+		/*
+		 * local
+		 * jdbc:mysql://localhost/SPPD
+		 * root
+		 * 123456
+		 * 
+		 */
 		try{
 			String driveName = "com.mysql.jdbc.Driver";
 			Class.forName(driveName);		
-			String url = "jdbc:mysql://localhost/SPPD";
-			String userName = "root";
-			String passWord = "123456";
+			String url = "jdbc:mysql://bd-sppd.mysql.uhserver.com/bd_sppd";
+			String userName = "vitor_adm";
+			String passWord = "224468.Delfino";
 			
 			con = DriverManager.getConnection(url,userName,passWord);
 			

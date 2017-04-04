@@ -24,7 +24,7 @@ public class Login {
 		Connection c = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-		String sql = "select count(*) from LOGIN l where l.username = ? and l.password = ?";
+		String sql = "select count(*) from login l where l.username = ? and l.password = ?";
 		String sql2 = "select * from passageiro p where p.cpf = ?";
 		List<LoginBean> l = new ArrayList<>();
 		try{
@@ -91,7 +91,7 @@ public class Login {
 		System.out.println("Senha atual validada");
 		Connection c = null;
 		PreparedStatement pst = null;
-		String sql = "update LOGIN l " +
+		String sql = "update login l " +
 				"set l.password = ? " +
 				"where l.username = ? ";		
 		try{
@@ -129,7 +129,7 @@ public class Login {
 		System.out.println("Nova Senha = " + novaSenha);
 		Connection c = null;
 		PreparedStatement pst = null;
-		String sql = "update LOGIN l " +
+		String sql = "update login l " +
 				"set l.password = ? " +
 				"where l.username = ? ";
 		
@@ -167,7 +167,7 @@ public class Login {
 		Connection c = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-		String sql = "select l.password from LOGIN l where l.username = ? ";
+		String sql = "select l.password from login l where l.username = ? ";
 		try{
 			System.out.println("Buscando usuário: " + cpf);
 			c = new ConnectionFactory().getConnection();
