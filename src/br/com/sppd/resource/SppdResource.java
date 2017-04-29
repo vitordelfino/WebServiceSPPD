@@ -8,9 +8,13 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.google.gson.Gson;
 
 import br.com.sppd.controller.CartaoController;
 import br.com.sppd.controller.DijkstraController;
@@ -18,14 +22,14 @@ import br.com.sppd.controller.EstacaoController;
 import br.com.sppd.controller.HistoricoSaldoCartaoController;
 import br.com.sppd.controller.LoginController;
 import br.com.sppd.controller.PassageiroController;
+import br.com.sppd.controller.ViagemController;
 import br.com.sppd.dbms.bean.Cartao;
 import br.com.sppd.dbms.bean.Estacao;
 import br.com.sppd.dbms.bean.HistoricoSaldoCartaoBean;
 import br.com.sppd.dbms.bean.LoginBean;
 import br.com.sppd.dbms.bean.Passageiro;
-import br.com.sppd.dijkstra.Vertice;
+import br.com.sppd.dbms.bean.Viagem;
 import br.com.sppd.retorno.Retorno;
-import jdk.nashorn.internal.parser.JSONParser;
 
 /**
  * 
@@ -52,7 +56,13 @@ public class SppdResource {
 	public List<Estacao> getListaEstacao() {
 		return new EstacaoController().getListaEstacao();
 	}
-
+	
+	@GET
+	@Path("/getListaEstacaoTeste")
+	@Produces("application/json")
+	public Response getListaEstacaoTeste() {		
+		return new RetornoResponse().ok(new EstacaoController().getListaEstacao());				
+	}
 	
 	/*
 	 * REQUISICOES REFERENTE MANIPULACAO DE PASSAGEIRO/USUARIO
@@ -72,7 +82,7 @@ public class SppdResource {
 	@Path("passageiro/cadastraPassageiro/")
 	@Consumes({ "application/json" })
 	@Produces("application/json")
-	public List<Retorno> cadastraPassageiro(String inputJson) throws JSONException {
+	public Response cadastraPassageiro(String inputJson) throws JSONException {
 		
 		JSONObject jo = new JSONObject(inputJson);
 		System.out.println("Body recebido: \n" + jo);
@@ -103,7 +113,7 @@ public class SppdResource {
 		System.out.println(p.toString());
 		List<Retorno> list = new PassageiroController().cadastraPassageiro(p);
 		System.out.println(list.toString());
-		return list;
+		return new RetornoResponse().ok(list);
 	}
 	
 	
@@ -114,31 +124,31 @@ public class SppdResource {
 	@GET
 	@Path("login/logar/{usuario}/{senha}")
 	@Produces("application/json")
-	public List<LoginBean> logar(@PathParam("usuario") String usuario, @PathParam("senha") String senha) {
+	public Response logar(@PathParam("usuario") String usuario, @PathParam("senha") String senha) {
 		System.out.println("Logando com usuÃ¡rio: " + usuario);
 		List<LoginBean> retorno = new LoginController().logar(usuario, senha);
 		System.out.println(retorno.toString());
-		return retorno;
+		return new RetornoResponse().ok(retorno);
 	}
 
 	@POST
 	@Path("/login/alterarSenha/{cpf}/{novaSenha}")
 	@Consumes({ "application/json" })
 	@Produces("application/json")
-	public Retorno alterarSenha(@PathParam("cpf") String cpf,
+	public Response alterarSenha(@PathParam("cpf") String cpf,
 				@PathParam("novaSenha") String novaSenha){
 		System.out.println("Chamando método de alteração de senha para novos usuários");
-		return new LoginController().alterarSenha(cpf, novaSenha);
+		return new RetornoResponse().ok(new LoginController().alterarSenha(cpf, novaSenha));
 	}
 	@POST
 	@Path("/login/alterarSenha/{cpf}/{senhaAtual}/{novaSenha}")
 	@Consumes({ "application/json" })
 	@Produces("application/json")
-	public Retorno alterarSenha(@PathParam("cpf") String cpf,
+	public Response alterarSenha(@PathParam("cpf") String cpf,
 				@PathParam("senhaAtual") String senhaAtual,
 				@PathParam("novaSenha") String novaSenha){
 		System.out.println("Chamando método de alteração de senha para usuários já cadastrados");
-		return new LoginController().alterarSenha(cpf,senhaAtual, novaSenha);
+		return new RetornoResponse().ok(new LoginController().alterarSenha(cpf,senhaAtual, novaSenha));
 	}
 	
 	
@@ -148,11 +158,11 @@ public class SppdResource {
 	@GET
 	@Path("/cartao/getCartoes/{codPassageiro}")
 	@Produces("application/json")
-	public List<Cartao> getCartoes(@PathParam("codPassageiro") int codPassageiro) {
+	public Response getCartoes(@PathParam("codPassageiro") int codPassageiro) {
 		System.out.println("Buscando CartÃµes");
 		List<Cartao> cartoes = new CartaoController().getCartoes(codPassageiro);
 		System.out.println("Retorno = " + cartoes.toString());
-		return cartoes;
+		return new RetornoResponse().ok(cartoes);
 	}
 
 	@POST
@@ -209,17 +219,17 @@ public class SppdResource {
 	@GET
 	@Path("/cartao/getHistoricoCartao/{codCartao}")
 	@Produces("application/json")
-	public List<HistoricoSaldoCartaoBean> getHistoricoCartao(@PathParam("codCartao") int codCartao) {
+	public Response getHistoricoCartao(@PathParam("codCartao") int codCartao) {
 		System.out.println("Buscando Historico do cartão");
 		List<HistoricoSaldoCartaoBean> historico = new HistoricoSaldoCartaoController().getHistoricoCartao(codCartao);
 		System.out.println("Retorno = " + historico.toString());
-		return historico;
+		return new RetornoResponse().ok(historico);
 	}
 	
 	@POST
 	@Path("/dijkstra/encontrarMenorCaminho/")
 	@Produces("application/json")
-	public List<Estacao> encontrarMenorCaminhoDijkstra(String inputJson){
+	public Response encontrarMenorCaminhoDijkstra(String inputJson){
 		String origem = "";
 		String destino = "";
 		try{
@@ -231,7 +241,16 @@ public class SppdResource {
 		}catch(JSONException e){
 			e.printStackTrace();
 		}		
-		
-		return new DijkstraController().encontrarMenorCaminhoDijkstra(origem, destino);
+		return new RetornoResponse().ok(new DijkstraController().encontrarMenorCaminhoDijkstra(origem, destino));
+	}
+	
+	/*
+	 * REQUISIÇÕES REFERENTES À VIAGENS
+	 */
+	@GET
+	@Path("/viagens/getHistoricoViagem/{codPassageiro}")
+	@Produces("application/json")
+	public List<Viagem> getHistoricoViavem(@PathParam("codPassageiro")int codPassageiro){
+		return new ViagemController().getHistoricoViagens(codPassageiro);
 	}
 }

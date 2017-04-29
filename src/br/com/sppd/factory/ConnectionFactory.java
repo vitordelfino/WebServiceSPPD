@@ -15,7 +15,7 @@ public class ConnectionFactory {
 		
 		/*
 		 * local
-		 * jdbc:mysql://localhost/SPPD
+		 * jdbc:mysql://localhost/sppd_tg
 		 * root
 		 * 123456
 		 * 
@@ -23,9 +23,9 @@ public class ConnectionFactory {
 		try{
 			String driveName = "com.mysql.jdbc.Driver";
 			Class.forName(driveName);		
-			String url = "jdbc:mysql://bd-sppd.mysql.uhserver.com/bd_sppd";
-			String userName = "vitor_adm";
-			String passWord = "224468.Delfino";
+			String url = "jdbc:mysql://localhost/sppd_tg";
+			String userName = "root";
+			String passWord = "123456";
 			
 			con = DriverManager.getConnection(url,userName,passWord);
 			

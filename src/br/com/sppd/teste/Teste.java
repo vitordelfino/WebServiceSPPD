@@ -75,7 +75,7 @@ static void logar(){
 	System.out.println(l.logar("42780908890", "42780908890.").toString());
 }
 
-static void setNovaViagem(){
+/*static void setNovaViagem(){
 	Viagem viagem = new Viagem();
 	viagem.setCartao(new Cartao(100001));
 	viagem.setPassageiro(new Passageiro(1));
@@ -84,7 +84,7 @@ static void setNovaViagem(){
 	Retorno retorno = new ViagemDAO().setNovaViagem(viagem);
 	System.out.println(retorno.getStatus());
 	
-}
+}*/
 
 static void testaCaminho(){
 	System.out.println(new testeCaminho().testar("Grafo.txt", "CARAPICUIBA", "ITAPEVI"));
