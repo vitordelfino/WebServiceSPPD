@@ -40,14 +40,14 @@ Foi implementado um algoritmo com base no mapa da CPTM, onde informado "origem" 
 	   "nomeEstacao": "SANTA TEREZINHA"
 	  },
 	  {
-		"codEstacao": "0",
-		"linha": "8",
-		"nomeEstacao": "ANTONIO JOÃO"
+	   "codEstacao": "0",
+	   "linha": "8",
+	   "nomeEstacao": "ANTONIO JOÃO"
 	  },
 	  {
-		"codEstacao": "0",
-		"linha": "8",
-		"nomeEstacao": "BARUERI"
+	   "codEstacao": "0",
+	   "linha": "8",
+	   "nomeEstacao": "BARUERI"
 	  }
 	 ]
 	}
