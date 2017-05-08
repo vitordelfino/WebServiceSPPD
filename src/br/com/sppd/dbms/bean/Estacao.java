@@ -16,7 +16,7 @@ public class Estacao {
 
 	private int codEstacao;
 	private int linha;
-	private String Nome;
+	private String nome;
 
 	public Estacao() {
 
@@ -72,7 +72,7 @@ public class Estacao {
 	 * @return the nome
 	 */
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class Estacao {
 	 *            the nome to set
 	 */
 	public void setNome(String nome) {
-		Nome = nome;
+		this.nome = nome;
 	}
 
 	/*
@@ -90,7 +90,7 @@ public class Estacao {
 	 */
 	@Override
 	public String toString() {
-		return "Estacao [codEstacao=" + codEstacao + ", linha=" + linha + ", Nome=" + Nome + "]";
+		return "Estacao [codEstacao=" + codEstacao + ", linha=" + linha + ", Nome=" + nome + "]";
 	}
 
 }

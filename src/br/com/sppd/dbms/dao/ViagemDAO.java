@@ -134,7 +134,7 @@ public class ViagemDAO {
 						"where v.entrandoSaindo = 0 " +
 						"and v.origem = origem.codEstacao " +
 						"and v.destino = destino.codEstacao " +
-						"and codPassageiro = ? ";
+						"and codPassageiro = ? order by dataEntrada desc";
 		
 		ResultSet rs = null;
 		List<Viagem> viagens = new ArrayList<Viagem>();
